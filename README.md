@@ -3,9 +3,9 @@
 Порядок действий:
 1) Установить Ansible (sudo yum install ansible)
 2) Скопировать файлы [setup.yml](https://github.com/HungryMurky/infra_test/blob/main/setup.yml) и [inventory.ini](https://github.com/HungryMurky/infra_test/blob/main/inventory.ini) на виртуальную машину
-3) Запустить Ansible playbook ansible-playbook -i inventory.ini setup.yml
+3) Запустить Ansible playbook: ansible-playbook -i inventory.ini setup.yml
 
-Playbook выполните следующее:
+Playbook выполнит следующее:
 - Установит docker
 - Установит docker-compose
 - Скопирует все необходимые файлы из данного репозитория в папку /home/ec2-user/infra_test (создаст директорию при необходимости)
@@ -17,7 +17,7 @@ Playbook выполните следующее:
 
 [getfromDB.bash](https://github.com/HungryMurky/infra_test/blob/main/getfromDB.bash). Подключается к postgres, запрашивает последнюю добавленную строку из таблицы, переносит данные в html страницу Apache.
 
-Проверить работу здесь: http://16.171.200.100:8080/
+Проверить работу здесь: http://13.60.50.63:8080/
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Тестовое задание на IT Infrastructure Engineer
 Список технологий (продуктов): 
