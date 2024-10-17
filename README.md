@@ -1,8 +1,10 @@
 # infra_test
-Для теста использовалась виртуальная машина Amazon Linux.
+Для теста использовалась виртуальная машина Amazon Linux. 
 Порядок действий:
 1) Установить Ansible (sudo yum install ansible)
 2) Скопировать файлы [setup.yml](https://github.com/HungryMurky/infra_test/blob/main/setup.yml) и [inventory.ini](https://github.com/HungryMurky/infra_test/blob/main/inventory.ini) на виртуальную машину
+  wget https://raw.githubusercontent.com/HungryMurky/infra_test/refs/heads/main/setup.yml
+  wget https://raw.githubusercontent.com/HungryMurky/infra_test/refs/heads/main/inventory.ini
 3) Запустить Ansible playbook: ansible-playbook -i inventory.ini setup.yml
 
 Playbook выполнит следующее:
