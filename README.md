@@ -1,5 +1,8 @@
 # infra_test
 Для теста использовалась виртуальная машина Amazon Linux. 
+Совместимость проверялась (!)только(!) для Amazon Linux.
+Доработка на совместимость с другими дистрибутивами по запросу.
+
 Порядок действий:
 1) Установить Ansible (sudo yum install ansible)
 2) Скопировать файлы [setup.yml](https://github.com/HungryMurky/infra_test/blob/main/setup.yml) и [inventory.ini](https://github.com/HungryMurky/infra_test/blob/main/inventory.ini) на виртуальную машину
