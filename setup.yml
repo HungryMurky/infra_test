@@ -9,6 +9,12 @@
           - docker
         state: present
 
+    - name: Install Docker Compose
+      get_url:
+        url: https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'u+x'
+
     - name: Create directory for infra_test
       file:
         path: /home/ec2-user/infra_test
