@@ -1,0 +1,63 @@
+- name: TestPlaybook
+  hosts: localhost
+  become: true   
+  #  vars:        
+  tasks:
+    - name: Install docker
+      package:
+        name:
+          - docker
+        state: present
+
+    - name: Create directory for infra_test
+      file:
+        path: /home/ec2-user/infra_test
+        state: directory
+        owner: ec2-user
+        group: ec2-user
+        mode: '0755'
+
+    - name: Clone GitHub repository
+      git:
+        repo: 'https://github.com/HungryMurky/infra_test.git'
+        dest: /home/ec2-user/infra_test
+        update: yes
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Run docker-compose
+      command: /usr/local/bin/docker-compose up -d
+      args:
+        chdir: /home/ec2-user/infra_test
+
+    - name: Add execute permissions for pushtoDB
+      file:
+        path: /home/ec2-user/infra_test/pushtoDB.bash
+        mode: '0755'
+
+    - name: Add execute permissions for getfromDB
+      file:
+        path: /home/ec2-user/infra_test/getfromDB.bash
+        mode: '0755'
+
+    - name: Install cron on Red Hat-based systems
+      yum:
+        name: cronie
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Ensure cron is running and enabled
+      service:
+        name: crond
+        state: started
+        enabled: yes
+
+    - name: Add cron job for pushtoDB and getfromDB
+      cron:
+        name: "Run pushtoDB and getfromDB every 5 minutes"
+        minute: "*/5"
+        job: "cd /home/ec2-user/infra_test && ./pushtoDB.bash && ./getfromDB.bash"
