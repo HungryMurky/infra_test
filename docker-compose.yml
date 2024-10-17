@@ -1,0 +1,32 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - apache
+
+  apache:
+    build:
+      context: .
+      dockerfile: apache.Dockerfile
+    ports:
+      - "8081:80"
+    volumes:
+      - /home/ec2-user/infra_test/html/:/usr/local/apache2/htdocs/
+
+  postgres:
+    build:
+      context: .
+      dockerfile: postgres.Dockerfile
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
